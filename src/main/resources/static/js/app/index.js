@@ -12,6 +12,10 @@ var main = {
         $('#btn-delete').on('click', function () {
             _this.delete();
         });
+
+        $('#btn-join').on('click', function () {
+            _this.join();
+        });
     },
     save: function () {
         var data = {
@@ -22,7 +26,7 @@ var main = {
 
         $.ajax({
             type: 'POST',
-            url: '/api/v1/posts',
+            url: '/api/v1/problem',
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(data)
@@ -44,7 +48,7 @@ var main = {
 
         $.ajax({
             type: 'PUT',
-            url: '/api/v1/posts/' + id,
+            url: '/api/v1/problem/' + id,
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(data)
@@ -61,7 +65,7 @@ var main = {
 
         $.ajax({
             type: 'DELETE',
-            url: '/api/v1/posts/' + id,
+            url: '/api/v1/problem/' + id,
             dataType: 'json',
             contentType: 'application/json; charset=utf-8'
         }).done(function () {
@@ -70,6 +74,27 @@ var main = {
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
+    },
+
+    join: function () {
+        // var data = {
+        //     id: $('#id').val(),
+        //     : $('#password').val(),
+        //
+        // };
+        //
+        // $.ajax({
+        //     type: 'POST',
+        //     url: '/api/v1/problem',
+        //     dataType: 'json',
+        //     contentType: 'application/json; charset=utf-8',
+        //     data: JSON.stringify(data)
+        // }).done(function () {
+        //     alert('글이 등록되었습니다.');
+        //     window.location.href = '/';
+        // }).fail(function (error) {
+        //     alert(JSON.stringify(error));
+        // });
     }
 };
 

@@ -28,14 +28,19 @@ public class Member {
     @Column
     private String picture;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role;
+
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private List<Problem> problems = new ArrayList<>();
 
     @Builder
-    public Member(String name, String email, String picture){
+    public Member(String name, String email, String picture, Role role){
         this.name = name;
         this.email = email;
         this.picture = picture;
+        this.role = role;
     }
 
     public Member update(String name, String picture){
@@ -49,5 +54,9 @@ public class Member {
         problem.setMember(this);
         problems.add(problem);
 
+    }
+
+    public String getRoleKey(){
+        return this.role.getKey();
     }
 }

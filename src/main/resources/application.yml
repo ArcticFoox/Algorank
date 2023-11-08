@@ -13,7 +13,20 @@ spring:
       hibernate:
         format_sql: true
 
+  profiles:
+    include: oauth
+
+  h2:
+    console:
+      enabled: true
+
 logging:
   level:
     org.hibernate.sql : debug
     org.hibernate.jdbc.bind : trace
+
+server:
+  servlet:
+    encoding:
+      force: true
+

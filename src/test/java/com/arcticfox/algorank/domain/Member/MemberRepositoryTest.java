@@ -51,7 +51,8 @@ class MemberRepositoryTest {
         String email = "jong@naver.com";
         String picture = "1.png";
 
-        Member member = new Member(name, email, picture);
+
+        Member member = new Member(name, email, picture, Role.USER);
 
         String name2 = "name2";
         String picture2 = "2.png";

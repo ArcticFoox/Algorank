@@ -1,5 +1,7 @@
 package com.arcticfox.algorank.service;
 
+import com.arcticfox.algorank.domain.Member.Member;
+import com.arcticfox.algorank.domain.Member.MemberRepository;
 import com.arcticfox.algorank.domain.problem.Problem;
 import com.arcticfox.algorank.domain.problem.ProblemRepository;
 import com.arcticfox.algorank.web.dto.ProblemListResponseDto;
@@ -18,10 +20,12 @@ import java.util.stream.Collectors;
 public class ProblemService {
 
     private final ProblemRepository problemRepository;
+    private final MemberRepository memberRepository;
 
     @Transactional
     public Long save(ProblemSaveRequestDto requestDto) {
-        return problemRepository.save(requestDto.toEntity()).getId();
+        Member member = memberRepository.findByEmail(requestDto.getMemberEmail()).get();
+        return problemRepository.save(requestDto.toEntity(member)).getId();
     }
 
     @Transactional
@@ -44,6 +48,13 @@ public class ProblemService {
     @Transactional(readOnly = true)
     public List<ProblemListResponseDto> findAllDesc(){
         return problemRepository.findAll().stream()
+                .map(ProblemListResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<ProblemListResponseDto> findByMemberId(Long id){
+        return problemRepository.findByMemberId(id).stream()
                 .map(ProblemListResponseDto::new)
                 .collect(Collectors.toList());
     }

@@ -34,7 +34,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(new AntPathRequestMatcher("/"), new AntPathRequestMatcher("/css/**"),
                                 new AntPathRequestMatcher("/js/**"), new AntPathRequestMatcher("/image/**"),
-                                new AntPathRequestMatcher("/h2-console/")).permitAll()
+                                new AntPathRequestMatcher("/h2-console/**")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/api/v1/**")).hasRole(Role.USER.name())
                         .anyRequest().authenticated())
                 .logout(logout -> logout.logoutSuccessUrl("/"))

@@ -1,0 +1,29 @@
+{{>layout/header}}
+
+<h1>AlgoRank V1</h1>
+<div class="col-md-12">
+    <table class="table table-horizontal table-bordered">
+        <thead class="thead-strong">
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>난이도</th>
+            <th>내용</th>
+            <th>업로드 일자</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        {{#memberProblems}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{title}}</td>
+                <td>{{level}}</td>
+                <td>{{content}}</td>
+                <td>{{createdDate}}</td>
+            </tr>
+        {{/memberProblems}}
+        </tbody>
+    </table>
+</div>
+
+{{>layout/footer}}

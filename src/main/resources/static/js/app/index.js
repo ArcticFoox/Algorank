@@ -19,8 +19,9 @@ var main = {
     },
     save: function () {
         var data = {
+            memberEmail: $('#memberEmail').val(),
             title: $('#title').val(),
-            author: $('#author').val(),
+            level: $('#level').val(),
             content: $('#content').val()
         };
 

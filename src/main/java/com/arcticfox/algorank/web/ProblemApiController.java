@@ -1,5 +1,6 @@
 package com.arcticfox.algorank.web;
 
+import com.arcticfox.algorank.service.MemberService;
 import com.arcticfox.algorank.service.ProblemService;
 import com.arcticfox.algorank.web.dto.ProblemResponseDto;
 import com.arcticfox.algorank.web.dto.ProblemSaveRequestDto;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class ProblemApiController {
 
     private final ProblemService problemService;
+    private final MemberService memberService;
 
     @PostMapping("/api/v1/problem")
     public Long save(@RequestBody ProblemSaveRequestDto requestDto) {

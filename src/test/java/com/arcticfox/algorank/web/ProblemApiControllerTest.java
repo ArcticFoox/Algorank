@@ -2,6 +2,7 @@ package com.arcticfox.algorank.web;
 
 import com.arcticfox.algorank.domain.Member.Member;
 import com.arcticfox.algorank.domain.Member.MemberRepository;
+import com.arcticfox.algorank.domain.Member.Role;
 import com.arcticfox.algorank.domain.problem.Problem;
 import com.arcticfox.algorank.domain.problem.ProblemRepository;
 import com.arcticfox.algorank.web.dto.ProblemSaveRequestDto;
@@ -46,6 +47,8 @@ class ProblemApiControllerTest {
         //given
         String title = "title";
         String content = "content";
+        String level = "level";
+
 
         Member member = Member.builder()
                 .name("name")
@@ -58,13 +61,13 @@ class ProblemApiControllerTest {
         ProblemSaveRequestDto requestDto = ProblemSaveRequestDto.builder()
                 .title(title)
                 .content(content)
-                .member(member)
+                .level(level)
                 .build();
 
         String url = "http://localhost:" + port + "/api/v1/problem";
 
         //when
-        ResponseEntity<Long> responseEntity = restTemplate.postForEntity(url, requestDto, Long.class);
+        ResponseEntity<Long> responseEntity = restTemplate.postForEntity(url, requestDto.toEntity(member), Long.class);
 
         //then
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -80,11 +83,13 @@ class ProblemApiControllerTest {
         //given
         String title = "title";
         String content = "content";
+        String level = "level";
 
         Member member = Member.builder()
                 .name("name")
                 .email("jong@naver.com")
                 .picture("1.png")
+                .role(Role.USER)
                 .build();
 
         memberRepository.save(member);
@@ -92,13 +97,13 @@ class ProblemApiControllerTest {
         ProblemSaveRequestDto requestDto = ProblemSaveRequestDto.builder()
                 .title(title)
                 .content(content)
-                .member(member)
+                .level(level)
                 .build();
 
         String url = "http://localhost:" + port + "/api/v1/problem";
 
         //when
-        ResponseEntity<Long> responseEntity = restTemplate.postForEntity(url, requestDto, Long.class);
+        ResponseEntity<Long> responseEntity = restTemplate.postForEntity(url, requestDto.toEntity(member), Long.class);
 
         //then
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);

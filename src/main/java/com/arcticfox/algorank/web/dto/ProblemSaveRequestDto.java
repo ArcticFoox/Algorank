@@ -11,19 +11,22 @@ import lombok.NoArgsConstructor;
 public class ProblemSaveRequestDto {
     private String title;
     private String content;
-    private Member member;
+    private String level;
+    private String memberEmail;
 
     @Builder
-    public ProblemSaveRequestDto(String title, String content, Member member){
+    public ProblemSaveRequestDto(String title, String content, String level, String memberEmail){
         this.title = title;
         this.content = content;
-        this.member = member;
+        this.level = level;
+        this.memberEmail = memberEmail;
     }
 
-    public Problem toEntity(){
+    public Problem toEntity(Member member){
         return Problem.builder()
                 .title(title)
                 .content(content)
+                .level(level)
                 .member(member)
                 .build();
     }

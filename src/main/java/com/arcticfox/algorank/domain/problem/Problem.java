@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+
 @Getter
 @NoArgsConstructor
 @Entity
@@ -22,14 +23,18 @@ public class Problem extends BaseTimeEntity {
     @Column(nullable = false)
     private String content;
 
+    @Column
+    private String level;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", updatable = false)
     private Member member;
 
     @Builder
-    public Problem(String title, String content, Member member){
+    public Problem(String title, String content, String level, Member member){
         this.title = title;
         this.content = content;
+        this.level = level;
         this.member = member;
     }
 
